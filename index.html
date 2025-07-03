@@ -309,7 +309,9 @@
 
         const uniqueQuestions = getUniqueQuestions(allQuestions[currentLanguage]);
         // Limit the quiz to a maximum of 15 questions, even if more are available
-        const questionCount = Math.min(uniqueQuestions.length, 15);
+        // Use all available questions
+        const questionCount = uniqueQuestions.length;
+
         questions = uniqueQuestions.sort(() => 0.5 - Math.random()).slice(0, questionCount);
         
         current = 0; score = 0; wrong = 0; skipped = 0;
