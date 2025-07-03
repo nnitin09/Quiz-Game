@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GK Quiz | The Ultimate Animated Challenge</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Challenge yourself with this futuristic and highly animated General Knowledge (GK) Quiz. Featuring stunning visuals, a massive question bank, and a fluid user experience.">
+    <meta name="keywords" content="GK quiz, general knowledge, trivia, online quiz, animated quiz, fun quiz, educational game, brain game, competitive exams">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#1a1a2e">
+
+    <!-- Open Graph (for sharing on social media) -->
+    <meta property="og:title" content="The Ultimate Animated GK Quiz Challenge">
+    <meta property="og:description" content="Test your knowledge with this fun and interactive GK quiz with over 500 questions. Can you beat my score?">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://yourwebsite.com/thumbnail.png"> <!-- Replace with a real image URL -->
+    <meta property="og:url" content="https://yourwebsite.com"> <!-- Replace with your site's URL -->
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Ultimate Animated GK Quiz Challenge">
+    <meta name="twitter:description" content="Challenge your mind with this stunning GK quiz with over 500 questions and share your score!">
+    <meta name="twitter:image" content="https://yourwebsite.com/thumbnail.png"> <!-- Replace with a real image URL -->
+
+    <style>
+        :root {
+            --primary-glow: #00f2ea;
+            --danger-glow: #ff0054;
+            --success-glow: #39ff14;
+            --warning-glow: #ffc107;
+            --bg-dark: #161623;
+            --text-light: #f0f0f0;
+        }
+
+        body {
+            background-color: #0f0c29;
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Prevent scrollbars from animated background */
+        }
+        
+        #stars, #stars2, #stars3 {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%;
+            display: block;
+            background: transparent;
+        }
+
+        @keyframes move-stars {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-2000px); }
+        }
+        #stars { animation: move-stars 150s linear infinite; }
+        #stars2 { animation: move-stars 100s linear infinite; background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 20px 20px; }
+        #stars3 { animation: move-stars 50s linear infinite; background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 40px 40px; }
+        
+        .container {
+            width: 90%; max-width: 800px;
+            margin: auto; padding: 20px;
+            text-align: center;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            z-index: 10;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+        
+        @keyframes fade-slide-in {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #startPage .glass-card > * { animation: fade-slide-in 0.8s backwards; }
+        #startPage .lang-selector { animation-delay: 0.1s; }
+        #startPage h1 { animation-delay: 0.2s; }
+        #startPage p { animation-delay: 0.3s; }
+        #startPage .button-group { animation-delay: 0.4s; }
+        #startPage .subscribe { animation-delay: 0.5s; }
+        
+        .slide-out-left { animation: slide-out-left 0.4s forwards; }
+        .slide-in-right { animation: slide-in-right 0.4s forwards; }
+        @keyframes slide-out-left { to { opacity: 0; transform: translateX(-100px); } }
+        @keyframes slide-in-right { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
+
+        h1 { font-size: 3.5rem; font-weight: 700; text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow); margin-bottom: 15px; }
+        #startPage p { font-size: 1.1rem; line-height: 1.6; margin: 20px 0; color: rgba(255, 255, 255, 0.8); }
+        .button-group { margin: 20px 0; }
+
+        .button, .subscribe, .lang-btn {
+            padding: 15px 30px; border-radius: 50px; margin: 8px; cursor: pointer;
+            font-size: 1.2rem; font-weight: 600; transition: all 0.3s ease;
+            border: 1px solid var(--primary-glow); text-decoration: none; display: inline-block;
+        }
+        
+        .button-secondary, .lang-btn { background: transparent; color: var(--primary-glow); border-color: var(--primary-glow); }
+        .button-secondary:hover, .lang-btn:hover:not(.active) { background: var(--primary-glow); color: var(--bg-dark); transform: translateY(-5px); box-shadow: 0 0 25px var(--primary-glow), 0 0 40px var(--primary-glow); }
+        
+        .button, .lang-btn.active { background: var(--primary-glow); color: var(--bg-dark); box-shadow: 0 0 15px var(--primary-glow); }
+        .button:hover, .lang-btn.active:hover { transform: translateY(-5px); box-shadow: 0 0 30px var(--primary-glow), 0 0 50px var(--primary-glow); }
+        .subscribe { background: transparent; color: var(--danger-glow); border-color: var(--danger-glow); }
+        .subscribe:hover { background: var(--danger-glow); color: white; transform: translateY(-5px); box-shadow: 0 0 25px var(--danger-glow); }
+        .lang-selector { margin-bottom: 20px; }
+        .lang-btn { padding: 10px 25px; font-size: 1rem; }
+
+        .question { font-size: 2rem; font-weight: 600; margin: 25px 0; padding: 30px; min-height: 120px; display: flex; align-items: center; justify-content: center; }
+
+        .options-container { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .option {
+            background: rgba(255, 255, 255, 0.05); color: var(--text-light); padding: 20px; border-radius: 15px;
+            cursor: pointer; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.2rem; backdrop-filter: blur(5px);
+            opacity: 0; animation: fade-slide-in 0.5s forwards;
+        }
+        .option:nth-child(1) { animation-delay: 0.2s; }
+        .option:nth-child(2) { animation-delay: 0.3s; }
+        .option:nth-child(3) { animation-delay: 0.4s; }
+        .option:nth-child(4) { animation-delay: 0.5s; }
+
+        .option:not(.disabled):hover { transform: scale(1.05); background: rgba(0, 242, 234, 0.2); border-color: var(--primary-glow); }
+        .option.correct { background: rgba(57, 255, 20, 0.3); border-color: var(--success-glow); animation: pulse-green 0.8s; }
+        .option.wrong { background: rgba(255, 0, 84, 0.3); border-color: var(--danger-glow); animation: shake 0.5s; }
+        .option.disabled { cursor: not-allowed; opacity: 0.7; }
+
+        #quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        #timer { font-size: 1.2rem; font-weight: 600; background: rgba(0, 0, 0, 0.2); padding: 5px 15px; border-radius: 20px; transition: all 0.3s ease; }
+        #timer.low-time { color: var(--danger-glow); animation: pulse-red 1s infinite; }
+
+        #progress { width: 100%; height: 10px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; margin-top: 5px; overflow: hidden; }
+        #progress-bar { height: 100%; background: var(--primary-glow); border-radius: 10px; width: 0%; transition: width 0.5s ease-in-out; box-shadow: 0 0 10px var(--primary-glow); }
+        
+        .hidden { opacity: 0; pointer-events: none; transform: scale(0.9); }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { width: 90%; max-width: 500px; padding: 30px; text-align: left; position: relative; }
+        .modal-content ul { list-style: '👉'; padding-left: 20px; }
+        .modal-content li { margin-bottom: 10px; line-height: 1.5; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: white; cursor: pointer; transition: transform 0.2s; }
+        .close-btn:hover { transform: scale(1.2); }
+        
+        .quiz-footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: right; }
+        .button-skip { background: transparent; color: var(--warning-glow); border: 1px solid var(--warning-glow); padding: 10px 25px; font-size: 1rem; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .button-skip:hover:not(:disabled) { background: var(--warning-glow); color: var(--bg-dark); transform: translateY(-3px); box-shadow: 0 0 15px var(--warning-glow); }
+        .button-skip:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+        @keyframes pulse-red { 0%, 100% { transform: scale(1); box-shadow: 0 0 5px var(--danger-glow); } 50% { transform: scale(1.05); box-shadow: 0 0 15px var(--danger-glow); } }
+        @keyframes pulse-green { 0%, 100% { transform: scale(1); box-shadow: 0 0 5px var(--success-glow); } 50% { transform: scale(1.05); box-shadow: 0 0 15px var(--success-glow); } }
+        
+        @media (min-width: 600px) { .options-container { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+<div id="stars"></div><div id="stars2"></div><div id="stars3"></div>
+
+<div class="container" id="startPage">
+    <div class="glass-card">
+        <div class="lang-selector">
+            <button class="lang-btn active" id="lang-en" onclick="setLanguage('en')">English</button>
+            <button class="lang-btn" id="lang-hi" onclick="setLanguage('hi')">हिन्दी (Hindi)</button>
+        </div>
+        <h1 data-key="title">GK Quiz Challenge</h1>
+        <p data-key="welcome">
+            Welcome to the ultimate General Knowledge Quiz! Test your wits against the clock with a massive question bank.
+        </p>
+        <div class="button-group">
+            <button class="button" onclick="transitionToQuiz(event)" data-key="play">Play Now</button>
+            <button class="button button-secondary" id="instructionBtn" data-key="instructions">Instructions</button>
+            <button class="button button-secondary" onclick="share(event)" data-key="shareWebsite">Share Website</button>
+        </div>
+        <a class="subscribe" href="https://youtube.com/@nitish7629" target="_blank">📺 Subscribe</a>
+        <p style="margin-top:30px;font-size:0.8rem;color:rgba(255,255,255,0.5);">&copy; 2025 All rights reserved</p>
+    </div>
+</div>
+
+<div class="container hidden" id="quiz"></div>
+
+<div class="modal-overlay" id="instructionModal">
+    <div class="glass-card modal-content">
+        <span class="close-btn" id="closeModalBtn">&times;</span>
+        <h2 data-key="howToPlay">How to Play</h2>
+        <ul>
+            <li data-key="instr1">Each quiz round has important random questions.</li>
+            <li data-key="instr2">You have 15 seconds to answer each question.</li>
+            <li data-key="instr3">You can skip a question if you are unsure.</li>
+            <li data-key="instr4">Click on an option to select your answer.</li>
+            <li data-key="instr5">Correct answers are highlighted in green, wrong in red.</li>
+            <li data-key="instr6">Your score is displayed at the end. Good luck!</li>
+        </ul>
+    </div>
+</div>
+
+<audio id="correctSound" src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3" preload="auto"></audio>
+<audio id="wrongSound" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-bass-buzzer-948.mp3" preload="auto"></audio>
+<audio id="celebrationSound" src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-win-2016.mp3" preload="auto"></audio>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+<!-- IMPORTANT: Loading the external question files -->
+<script src="questions_en.js"></script>
+<script src="questions_hi.js"></script>
+
+<script>
+    // --- DATA SECTION ---
+    const uiStrings = {
+        en: { title: "GK Quiz Challenge", welcome: "Welcome to the ultimate General Knowledge Quiz! Test your wits against the clock with a massive question bank.", play: "Play Now", instructions: "Instructions", shareWebsite: "Share Website", howToPlay: "How to Play", instr1: "Each quiz round has important random questions.", instr2: "You have 15 seconds to answer each question.", instr3: "You can skip a question if you are unsure.", instr4: "Click on an option to select your answer.", instr5: "Correct answers are highlighted in green, wrong in red.", instr6: "Your score is displayed at the end. Good luck!", question: "Question", skip: "Skip", excellent: "Excellent Score!", goodEffort: "Good Effort!", betterLuck: "Better Luck Next Time!", yourScore: "Your Score", correct: "Correct", wrong: "Wrong", skipped: "Skipped", playAgain: "Play Again", shareScore: "Share Score", shareText: "Check out this awesome GK Quiz! Challenge yourself here:", shareScoreText: (score, total) => `I scored ${score}/${total} on this awesome GK Quiz! Can you beat my score?` },
+        hi: { title: "जीके क्विज़ चैलेंज", welcome: "परम सामान्य ज्ञान प्रश्नोत्तरी में आपका स्वागत है! विशाल प्रश्न बैंक के साथ समय के विरुद्ध अपनी बुद्धि का परीक्षण करें।", play: "अभी खेलें", instructions: "निर्देश", shareWebsite: "वेबसाइट साझा करें", howToPlay: "कैसे खेलें", instr1: "प्रत्येक क्विज़ दौर में महत्वपूर्ण यादृच्छिक प्रश्न होते हैं।", instr2: "प्रत्येक प्रश्न का उत्तर देने के लिए आपके पास 15 सेकंड हैं।", instr3: "यदि आप अनिश्चित हैं तो आप एक प्रश्न छोड़ सकते हैं।", instr4: "अपना उत्तर चुनने के लिए किसी एक विकल्प पर क्लिक करें।", instr5: "सही उत्तर हरे रंग में और गलत लाल रंग में हाइलाइट किए जाते हैं।", instr6: "आपका स्कोर अंत में प्रदर्शित होता है। शुभकामनाएँ!", question: "प्रश्न", skip: "छोड़ें", excellent: "उत्कृष्ट स्कोर!", goodEffort: "अच्छा प्रयास!", betterLuck: "अगली बार बेहतर किस्मत!", yourScore: "आपका स्कोर", correct: "सही", wrong: "गलत", skipped: "छोड़ा हुआ", playAgain: "फिर से खेलें", shareScore: "स्कोर साझा करें", shareText: "यह शानदार जीके क्विज़ देखें! अपने आप को यहाँ चुनौती दें:", shareScoreText: (score, total) => `मैंने इस शानदार जीके क्विज में ${total} में से ${score} अंक प्राप्त किए! क्या आप मेरे स्कोर को पार कर सकते हैं?` }
+    };
+    // The `allQuestions` object is no longer here. It is built inside startQuiz().
+
+    // --- STATE & ELEMENTS ---
+    let questions = [];
+    let current = 0, score = 0, wrong = 0, skipped = 0, timerInterval;
+    let currentLanguage = 'en';
+    let selectedHindiVoice = null;
+    let selectedEnglishVoice = null;
+
+    const quizEl = document.getElementById("quiz");
+    const startPageEl = document.getElementById("startPage");
+    const instructionModal = document.getElementById("instructionModal");
+    const instructionBtn = document.getElementById("instructionBtn");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+
+    // --- NEW: SPEECH SYNTHESIS INITIALIZATION ---
+    function initializeSpeechSynthesis() {
+        if (!('speechSynthesis' in window)) {
+            console.error("Speech Synthesis not supported in this browser.");
+            return;
+        }
+
+        function loadVoices() {
+            const voices = speechSynthesis.getVoices();
+            if (voices.length === 0) return; // Voices not loaded yet
+
+            selectedEnglishVoice = voices.find(v => v.name.includes('Google') && v.lang.startsWith('en')) || voices.find(v => v.lang.startsWith('en-US')) || voices.find(v => v.lang.startsWith('en'));
+            selectedHindiVoice = voices.find(v => v.name === 'Google हिन्दी') || voices.find(v => v.lang === 'hi-IN');
+            
+            speechSynthesis.onvoiceschanged = null;
+        }
+
+        speechSynthesis.onvoiceschanged = loadVoices;
+        loadVoices();
+    }
+
+    // --- CORE LOGIC ---
+    window.onload = () => {
+        setLanguage('en'); 
+        initializeSpeechSynthesis();
+    };
+    
+    function setLanguage(lang) {
+        currentLanguage = lang;
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(`lang-${lang}`).classList.add('active');
+        const strings = uiStrings[lang];
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.dataset.key;
+            if (strings[key]) el.innerHTML = strings[key];
+        });
+    }
+
+    instructionBtn.addEventListener('click', () => {
+        instructionModal.style.display = 'flex';
+        const instructions = Array.from(instructionModal.querySelectorAll('li')).map(li => li.textContent).join('. ');
+        speak(uiStrings[currentLanguage].howToPlay + '. ' + instructions);
+    });
+    closeModalBtn.addEventListener('click', () => { instructionModal.style.display = 'none'; speechSynthesis.cancel(); });
+    instructionModal.addEventListener('click', (e) => { if (e.target === instructionModal) { instructionModal.style.display = 'none'; speechSynthesis.cancel(); } });
+
+    function getUniqueQuestions(arr){const seen=new Set();return arr.filter(item=>{const duplicate=seen.has(item.q.toLowerCase());seen.add(item.q.toLowerCase());return!duplicate})}
+
+    function transitionToQuiz(e) {
+        if(e) animateBounce(e.target);
+        startPageEl.classList.add('hidden');
+        setTimeout(() => {
+            startPageEl.style.display = 'none';
+            quizEl.style.display = 'block';
+            quizEl.classList.remove('hidden');
+            startQuiz();
+        }, 500);
+    }
+
+    // --- UPDATED startQuiz FUNCTION ---
+    function startQuiz() {
+        // Build the question object from the variables loaded from external files
+        const allQuestions = {
+            en: englishQuestions, // This variable comes from questions_en.js
+            hi: hindiQuestions    // This variable comes from questions_hi.js
+        };
+
+        const uniqueQuestions = getUniqueQuestions(allQuestions[currentLanguage]);
+        // Limit the quiz to a maximum of 15 questions, even if more are available
+        const questionCount = Math.min(uniqueQuestions.length, 15);
+        questions = uniqueQuestions.sort(() => 0.5 - Math.random()).slice(0, questionCount);
+        
+        current = 0; score = 0; wrong = 0; skipped = 0;
+        showQuestion();
+    }
+
+    function showQuestion() {
+        clearInterval(timerInterval);
+        if (current >= questions.length) { showResults(); return; }
+        const quizCard = quizEl.querySelector('.glass-card');
+        if (quizCard) { quizCard.classList.add('slide-out-left'); setTimeout(renderNewQuestion, 400); } 
+        else { renderNewQuestion(); }
+    }
+    
+    function renderNewQuestion() {
+        let q = questions[current];
+        const strings = uiStrings[currentLanguage];
+        let quizContent = `
+            <div class="glass-card slide-in-right">
+                <div id="quiz-header">
+                    <div id="timer"></div>
+                    <span>${strings.question} ${current + 1} / ${questions.length}</span>
+                </div>
+                <div id="progress"><div id="progress-bar"></div></div>
+                <div class='question'>${q.q}</div>
+                <div class="options-container">
+                    ${q.o.map(opt => `<div class='option' onclick='checkAnswer(this, "${opt.replace(/"/g, '&quot;')}")'>${opt}</div>`).join('')}
+                </div>
+                <div class="quiz-footer">
+                    <button class="button-skip" onclick="skipQuestion()">${strings.skip}</button>
+                </div>
+            </div>`;
+        quizEl.innerHTML = quizContent;
+        updateProgress();
+        speak(q.q);
+        startTimer();
+    }
+    
+    function showResults() {
+        const strings = uiStrings[currentLanguage];
+        let finalMessage = strings.goodEffort;
+        const scorePercentage = questions.length > 0 ? (score / questions.length) : 0;
+
+        if (scorePercentage >= 0.7) { finalMessage = strings.excellent; playSound('celebration'); } 
+        else if (scorePercentage < 0.4) { finalMessage = strings.betterLuck; }
+
+        quizEl.innerHTML = `
+            <div class="glass-card" style="animation: fade-slide-in 0.8s;">
+                <h1>${finalMessage}</h1>
+                <h2 id="finalScore" style="margin:20px 0;">${strings.yourScore}: 0 / ${questions.length}</h2>
+                <p>${strings.correct}: ${score} | ${strings.wrong}: ${wrong} | ${strings.skipped}: ${skipped}</p>
+                <div class="button-group">
+                    <button class='button' onclick='transitionToQuiz(event)'>${strings.playAgain}</button>
+                    <button class='button button-secondary' onclick='share(event, ${score}, ${questions.length})'>${strings.shareScore}</button>
+                </div>
+                <a class='subscribe' href='https://youtube.com/@nitish7629' target='_blank'>📺 Subscribe</a>
+            </div>`;
+        
+        animateScore(score, questions.length);
+        if (scorePercentage >= 0.7) confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+    }
+    
+    function animateScore(finalScore, total) {
+        const scoreEl = document.getElementById('finalScore');
+        const strings = uiStrings[currentLanguage];
+        let currentScore = 0;
+        const duration = 1000;
+        const stepTime = 15;
+        const increment = total > 0 ? (finalScore / (duration / stepTime)) : 0;
+        const timer = setInterval(() => {
+            currentScore += increment;
+            if (currentScore >= finalScore) { currentScore = finalScore; clearInterval(timer); }
+            scoreEl.textContent = `${strings.yourScore}: ${Math.ceil(currentScore)} / ${total}`;
+        }, stepTime);
+    }
+
+    function disableAllInteractions() {
+        document.querySelectorAll('.option').forEach(option => option.classList.add('disabled'));
+        const skipBtn = document.querySelector('.button-skip');
+        if (skipBtn) skipBtn.disabled = true;
+    }
+
+    function checkAnswer(el, opt) {
+        clearInterval(timerInterval);
+        disableAllInteractions();
+        const isCorrect = opt === questions[current].a.replace(/"/g, '&quot;');
+        if (isCorrect) {
+            score++; el.classList.add('correct'); playSound('correct');
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            speak("Correct!");
+        } else {
+            wrong++; el.classList.add('wrong'); playSound('wrong'); speak("That's not right.");
+            document.querySelectorAll('.option').forEach(option => {
+                if (option.innerText.replace(/"/g, '&quot;') === questions[current].a.replace(/"/g, '&quot;')) {
+                    option.classList.add('correct');
+                }
+            });
+        }
+        current++;
+        setTimeout(showQuestion, 2200);
+    }
+    
+    function skipQuestion() {
+        clearInterval(timerInterval);
+        disableAllInteractions();
+        speak("Skipping.");
+        skipped++;
+        current++;
+        setTimeout(showQuestion, 800);
+    }
+
+    function speak(text) {
+        if ('speechSynthesis' in window && text) {
+            speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            if (currentLanguage === 'hi' && selectedHindiVoice) {
+                utterance.voice = selectedHindiVoice;
+                utterance.lang = 'hi-IN';
+            } else if (currentLanguage === 'en' && selectedEnglishVoice) {
+                utterance.voice = selectedEnglishVoice;
+                utterance.lang = 'en-US';
+            } else {
+                utterance.lang = currentLanguage;
+            }
+
+            speechSynthesis.speak(utterance);
+        }
+    }
+    function playSound(type) { const audio=document.getElementById(`${type}Sound`);if(audio){audio.currentTime=0;audio.play().catch(e=>console.warn("Audio play blocked",e))} }
+
+    function startTimer() {
+        let time = 15;
+        const timerEl = document.getElementById("timer");
+        timerEl.classList.remove('low-time');
+        function update() {
+            timerEl.textContent = `⏳ ${time}s`; time--;
+            if (time < 5) timerEl.classList.add('low-time');
+            if (time < 0) {
+                clearInterval(timerInterval); 
+                disableAllInteractions();
+                wrong++; speak("Time's up");
+                document.querySelectorAll('.option').forEach(option => {
+                    if(option.innerText.replace(/"/g,'&quot;')===questions[current].a.replace(/"/g,'&quot;')){option.classList.add('correct')}
+                });
+                current++;
+                setTimeout(showQuestion, 2200);
+            }
+        }
+        update();
+        timerInterval = setInterval(update, 1000);
+    }
+
+    function share(evt, finalScore, total) {
+        if(evt) animateBounce(evt.target);
+        const strings = uiStrings[currentLanguage];
+        let shareText;
+        if (finalScore !== undefined && total !== undefined) {
+            shareText = strings.shareScoreText(finalScore, total) + ` ${location.href}`;
+        } else {
+            shareText = `${strings.shareText} ${location.href}`;
+        }
+        if (navigator.share) { navigator.share({ title: strings.title, text: shareText }).catch(console.error); } 
+        else { window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`); }
+    }
+
+    function animateBounce(btn) { if(!btn)return;btn.style.animation="pulse-red 0.5s";btn.addEventListener("animationend",()=>btn.style.animation="",{once:true})}
+    function updateProgress() { const progress = questions.length > 0 ? ((current / questions.length) * 100) : 0; const bar = document.getElementById("progress-bar"); if(bar) bar.style.width = `${progress}%` }
+</script>
+
+</body>
+</html>
